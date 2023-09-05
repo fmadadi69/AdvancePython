@@ -45,6 +45,7 @@ def game_results(country, country_name):
            f'difference:{country["goal difference"]} , points:{country["points"]}'
 
 
+
 print(game_results(spain, 'Spain'))
 print(game_results(iran, 'Iran'))
 print(game_results(portugal, 'Portugal'))
