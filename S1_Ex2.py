@@ -1,7 +1,7 @@
-iran = {'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
-spain = {'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
-portugal = {'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
-marrakech = {'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
+iran = {'name': 'Iran', 'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
+spain = {'name': 'Spain', 'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
+portugal = {'name': 'Portugal', 'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
+marrakech = {'name': 'Morocco', 'wins': 0, 'loses': 0, 'draws': 0, 'goal difference': 0, 'points': 0}
 
 ir_sp = str(input())
 ir_po = str(input())
@@ -40,13 +40,16 @@ game_calculation(sp_ma, spain, marrakech)
 game_calculation(po_ma, portugal, marrakech)
 
 
-def game_results(country, country_name):
-    return f'{country_name}  wins:{country["wins"]} , loses:{country["loses"]} , draws:{country["draws"]} , goal ' \
+def game_results(country):
+    return f'{country["name"]}  wins:{country["wins"]} , loses:{country["loses"]} , draws:{country["draws"]} , goal ' \
            f'difference:{country["goal difference"]} , points:{country["points"]}'
 
 
+countries = [iran, spain, portugal, marrakech]
 
-print(game_results(spain, 'Spain'))
-print(game_results(iran, 'Iran'))
-print(game_results(portugal, 'Portugal'))
-print(game_results(marrakech, 'Morocco'))
+countries.sort(key=lambda e: e['name'], reverse=False)
+countries.sort(key=lambda e: (e['points'], e['wins']), reverse=True)
+
+
+for c in countries:
+    print(game_results(c))
