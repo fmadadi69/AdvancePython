@@ -34,9 +34,7 @@ def create_db(cursor):
         exit(1)
 
 
-try:
-    cnx = mysql.connector.connect(**config)
-    cursor = cnx.cursor()
+def change_db(cursor):
     try:
         cursor.execute(f'USE {db_name}')
     except mysql.connector.Error as err:
@@ -44,18 +42,13 @@ try:
         if err.errno == errorcode.ER_BAD_DB_ERROR:
             create_db(cursor)
             print(f"Database {db_name} created successfully")
+            cnx.database = db_name
         else:
             print(err.msg)
             exit(1)
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Somthing wrong with username or password")
-        cnx.database = db_name
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
-    else:
-        print(err)
-else:
+
+
+def create_tables(cursor, tables):
     for table_name, table_desc in tables.items():
         try:
             print(f'Creating table {table_name}: ', end=" ")
@@ -67,6 +60,22 @@ else:
                 print(err)
         else:
             print('OK')
+
+
+try:
+    cnx = mysql.connector.connect(**config)
+    cursor = cnx.cursor()
+    change_db(cursor)
+
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Somthing wrong with username or password")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+    else:
+        print(err)
+else:
+    create_tables(cursor, tables)
     add_person = (f"INSERT INTO person values (%(id)s, %(name)s, %(age)s, %(sex)s) ")
     data_person = {
         'id': cursor.lastrowid,
@@ -78,8 +87,8 @@ else:
     add_phone = (f'INSERT INTO phone values ({cursor.lastrowid},"09125067082", "MOBILE", 1 )')
     cursor.execute(add_phone)
     cnx.commit()
-    cursor.execute(f'SELECT * FROM person join phone on person.id = person_id')
-    for (id, name, age, sex, phone_id, phone_number, phone_type, person_id) in cursor:
-        print(f'{id} {name} {age} {phone_id} {phone_number} {phone_type}')
+    cursor.execute(f'SELECT id, name, age, phone_number, phone_type FROM person join phone on person.id = person_id')
+    for (id, name, age, phone_number, phone_type) in cursor:
+        print(f'{id} {name} {age} {phone_number} {phone_type}')
     cursor.close()
     cnx.close()
