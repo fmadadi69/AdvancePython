@@ -28,7 +28,7 @@ tables['phone'] = ('''CREATE TABLE `phone`(
 
 def create_db(cursor):
     try:
-        cursor.execute(f'CREATE DATABASE {db_name} DEFAULT CHARACTER SET "utf8"')
+        cursor.execute(f"create database {db_name} default character set 'UTF8MB4'")
     except mysql.connector.Error as err:
         print(f"Database failed to create: {err}")
         exit(1)
