@@ -27,15 +27,16 @@ url = 'https://bama.ir/car?brand=tara,automatic,manual&year=,1402&price=10000000
 # print(val)
 
 
-# ua = UserAgent()
-# user_agent = ua.chrome
-# opts = Options()
-# opts.page_load_strategy = 'normal'
-# opts.add_argument("--headless")
-# opts.add_argument("--no-sandbox")
-# opts.add_argument(f'user-agent={user_agent}')
-# opts.add_argument("--js-flags=--harmony")
-browser = webdriver.Firefox()
+ua = UserAgent()
+user_agent = ua.chrome
+opts = Options()
+opts.page_load_strategy = 'normal'
+opts.add_argument("--headless")
+opts.add_argument("--no-sandbox")
+opts.add_argument(f'user-agent={user_agent}')
+opts.add_argument("--js-flags=--harmony")
+opts.add_argument("driver_path=C:\chromedriver\chromedriver.exe")
+browser = webdriver.Chrome(options=opts)
 browser.get(url)
 time.sleep(1)
 
