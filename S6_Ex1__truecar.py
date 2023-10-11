@@ -5,8 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 # def get_data(first_page, last_page):
-browser = webdriver.Chrome()
-# browser = webdriver.Firefox()
+# browser = webdriver.Chrome()
+browser = webdriver.Firefox()
 # browser.get(f"https://www.truecar.com/used-cars-for-sale/listings/location-columbia-md/?page=1")
 # page_nums = browser.find_elements(By.XPATH, "//a[@data-test = 'paginationLink']")
 # max_page = 0
