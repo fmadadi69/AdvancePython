@@ -6,17 +6,9 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 
 # def get_data(first_page, last_page):
-# browser = uc.Chrome()
-opts = uc.ChromeOptions()
-opts.add_argument('--headless=new')
-opts.add_argument('ignore-certificate-errors')
-opts.add_argument('--ignore-ssl-errors=yes')
-opts.add_argument("--remote-allow-origins=*")
-browser = uc.Chrome(browser_executable_path='chromedriver.exe')
+# browser = webdriver.Chrome()
 # options=opts, executable_path = './chromedriver.exe')
-browser.maximize_window()
-time.sleep(10)
-# browser = webdriver.Firefox()
+browser = webdriver.Firefox()
 # browser.get(f"https://www.truecar.com/used-cars-for-sale/listings/location-columbia-md/?page=1")
 # page_nums = browser.find_elements(By.XPATH, "//a[@data-test = 'paginationLink']")
 # max_page = 0
