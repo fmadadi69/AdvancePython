@@ -68,3 +68,37 @@ last_item = {'make': 'پورشه، کاین',
              'price': '9,000,000,000'}
 
 print(get_data(100, last_item))
+
+'''
+class ScrapingReport(models.Model):
+    report_date = models.DateTimeField()
+    counts = models.IntegerField(default=0)
+    last_retrieve_car = models.IntegerField()
+
+
+class Cars(models.Model):
+    scraping_report = models.ForeignKey(ScrapingReport, on_delete=models.CASCADE)
+    make = models.CharField(max_length=100)
+    mileage = models.CharField(max_length=100)
+    condition = models.CharField(max_length=100)
+    location = models.CharField(max_length=250)
+    price = models.CharField(max_length=100)
+    
+    
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            "read_default_file": BASE_DIR / "db_config.cnf",
+            "init_command": "SET default_storage_engine = INNODB"
+        }
+    }
+}
+
+
+[client]
+database = carfinder
+user = root
+password = Baroon@5067082
+default_character_set = utf8
+'''
